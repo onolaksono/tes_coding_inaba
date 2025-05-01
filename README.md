@@ -1,4 +1,4 @@
-# Aplikasi Kasir Laravel (Tanpa Login)
+# Aplikasi Kasir Sederhana Menggunakan Laravel
 
 Aplikasi ini adalah sistem kasir sederhana berbasis Laravel menggunakan database PostgreSQL. Fitur utamanya meliputi:
 
