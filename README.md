@@ -20,7 +20,8 @@ cd tes_coding_inaba
 ```
 
 ### 2. Install Dependency Laravel
-```composer install
+```
+composer install
 ```
 
 ### 3. Setup File .env
