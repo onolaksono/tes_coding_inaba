@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
@@ -59,3 +60,56 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+=======
+# Aplikasi Kasir Laravel (Tanpa Login)
+
+Aplikasi ini adalah sistem kasir sederhana berbasis Laravel menggunakan database PostgreSQL. Fitur utamanya meliputi:
+- CRUD Produk
+- Fitur Checkout Produk
+- Validasi Stok
+
+---
+
+## 🚀 Langkah Instalasi
+
+### 1. Clone Repository
+```bash
+git clone https://github.com/onolaksono/tes_coding_inaba.git
+cd kasir-app
+```
+
+### 2. Install Dependency Laravel
+```bash
+composer install
+```
+
+### 3. Setup File .env
+Copy file .env.example lalu rename menjadi .env dan sesuaikan konfigurasi database PostgreSQL
+### Edit file .env
+```
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_DATABASE=kasir_app
+DB_USERNAME=postgres
+DB_PASSWORD=admin(sesuaikan dengan password pada PGAdmin)
+```
+Pastikan database PostgreSQL bernama kasir_app sudah dibuat terlebih dahulu.
+
+### 4. Generate Application Key
+```
+php artisan key:generate
+```
+
+### 5. Jalankan Migrasi dan Seeder (Data Awal)
+```
+php artisan migrate
+php artisan db:seed
+```
+
+### 6. Jalankan Server Laravel
+```
+php artisan serve
+```
+secara default Aplikasi akan berjalan di: http://127.0.0.1:8000
+>>>>>>> 1bc6748709d24b0b99a8daca5f42d157497ec45a
