@@ -48,5 +48,4 @@ php artisan db:seed
 ```
 php artisan serve
 ```
-secara default Aplikasi akan berjalan di:
-🔗 http://127.0.0.1:8000
+secara default Aplikasi akan berjalan di: http://127.0.0.1:8000
