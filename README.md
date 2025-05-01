@@ -1,2 +1,8 @@
-# tes_coding_inaba
-Membuat aplikasi kasir sederhana
+# Aplikasi Kasir Laravel
+
+## Instalasi
+
+1. Clone repositori:
+```bash
+git clone <repo-url>
+
