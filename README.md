@@ -16,7 +16,7 @@ Clone repositori dengan perintah berikut:
 
 ```bash
 git clone https://github.com/onolaksono/tes_coding_inaba.git
-cd kasir-app
+cd tes_coding_inaba
 ```
 
 ### 2. Install Dependency Laravel
