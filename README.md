@@ -48,6 +48,7 @@ php artisan migrate
 php artisan db:seed
 ```
 ### 6. Jalankan Server Laravel
-```php artisan serve
+```
+php artisan serve
 ```
 secara default Aplikasi akan berjalan di: http://127.0.0.1:8000
