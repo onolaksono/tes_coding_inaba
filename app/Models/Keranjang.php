@@ -11,7 +11,6 @@ class Keranjang extends Model
     protected $table = 'keranjang';
     protected $fillable = ['id_produk', 'produk', 'quantity', 'harga', 'subtotal'];
 
-    // Dalam model Keranjang, pastikan ada relasi ke produk yang memiliki stok
     public function produk()
     {
         return $this->belongsTo(Produk::class, 'id_produk');

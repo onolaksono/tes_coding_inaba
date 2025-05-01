@@ -2,20 +2,15 @@
 
 @section('content')
     <div class="row">
-        <!-- Judul Halaman -->
         <div class="col-md-12">
             <h2 class="mb-4">History</h2>
         </div>
 
         @include('produk.modal.produk_create')
-        <!-- Tambah Produk Button -->
         <div class="col-md-12 mb-4">
-            <!-- Tombol Tambah Produk -->
             <a href="/transaksi" class="btn btn-success">Buat Transaksi</a>
-
         </div>
 
-        <!-- Tabel Produk -->
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
@@ -35,7 +30,6 @@
                         <tbody>
                             @foreach ($transaksi as $item)
                                 <tr>
-                                    {{-- @include('transaksi.modal.detailHistory') --}}
                                     <td class="text-center">{{ $loop->iteration }}</td>
                                     <td>{{ $item->kode_transaksi }}</td>
                                     <td class="text-center">{{ $item->tanggal }}</td>
@@ -53,7 +47,6 @@
                             @endforeach
                         </tbody>
                     </table>
-                    <!-- Modal Detail Transaksi (Diletakkan di luar tabel) -->
                     @foreach ($transaksi as $item)
                         @include('transaksi.modal.detailHistory')
                         @include('transaksi.modal.hapusHistory')

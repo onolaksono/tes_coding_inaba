@@ -1,4 +1,4 @@
-<!-- Modal Hapus Produk -->
+<!-- Modal Hapus History -->
 <div class="modal fade" id="modalHapusHistory{{ $item->id }}" tabindex="-1" aria-labelledby="modalHapusHistory{{ $item->id }}" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">

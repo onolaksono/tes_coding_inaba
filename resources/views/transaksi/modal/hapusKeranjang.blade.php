@@ -1,4 +1,4 @@
-<!-- Modal Hapus Produk -->
+<!-- Modal Hapus Keranjang -->
 <div class="modal fade" id="modalHapuskeranjang" tabindex="-1" aria-labelledby="modalHapuskeranjang" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">

@@ -125,9 +125,10 @@
                                 <input type="text" class="form-control" id="kembali" value="Rp. 0" readonly>
                             </div>
                         </div>
-                        <!-- Tombol Simpan Transaksi -->
                         <div class="mt-4">
-                            <button type="submit" class="btn btn-primary">Simpan Transaksi</button>
+                            <button type="submit" class="btn btn-primary" {{ $jumlahItem == 0 ? 'disabled' : '' }}>
+                                Simpan Transaksi
+                            </button>
                         </div>
                     </form>
 
@@ -149,21 +150,18 @@
     </script>
 
     <script>
-        // Fungsi untuk memformat angka menjadi mata uang Indonesia
         function formatCurrency(value) {
-            value = value.replace(/\D/g, ''); // Hapus karakter selain angka
-            return 'Rp. ' + value.replace(/\B(?=(\d{3})+(?!\d))/g, "."); // Format sebagai mata uang
+            value = value.replace(/\D/g, '');
+            return 'Rp. ' + value.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
         }
 
-        // Mengupdate kembalian otomatis setiap kali input diterima berubah
         function updateKembalian() {
             var bayar = parseFloat(document.getElementById('bayar').value.replace(/Rp\. /g, '').replace(/\./g, '').trim());
             var diterima = document.getElementById('diterima').value.replace(/Rp\. /g, '').replace(/\D/g, '')
-        .trim(); // Ambil angka murni
+        .trim();
             var errorMessage = document.getElementById('error-message');
             var kembaliField = document.getElementById('kembali');
 
-            // Pastikan input diterima bukan kosong
             if (diterima === "" || isNaN(diterima)) {
                 errorMessage.innerHTML = "Uang tidak boleh kosong";
                 errorMessage.style.display = "block";
@@ -174,60 +172,52 @@
             // Hitung kembalian
             var kembali = parseFloat(diterima) - bayar;
 
-            // Jika kembalian negatif, tampilkan pesan error dan set kembalian jadi Rp. 0
+            // kembalian negatif
             if (kembali < 0) {
                 errorMessage.innerHTML = "Uang tidak boleh kurang dari total bayar";
                 errorMessage.style.display = "block";
                 kembaliField.value = "Rp. 0";
                 return;
             }
-
-            // Jika tidak ada error, sembunyikan pesan error dan tampilkan kembalian
             errorMessage.style.display = "none";
             kembaliField.value = "Rp. " + kembali.toLocaleString('id-ID');
         }
 
-        // Menambahkan format currency pada input bayar
         document.getElementById('bayar').addEventListener('input', function() {
             this.value = formatCurrency(this.value);
-            updateKembalian(); // Panggil fungsi untuk update kembalian setelah input bayar berubah
+            updateKembalian();
         });
 
-        // Menambahkan format currency pada input diterima
         document.getElementById('diterima').addEventListener('input', function() {
             var diterima = this.value.replace(/Rp\. /g, '').replace(/\D/g, '').trim();
-            this.value = formatCurrency(diterima); // Format setelah input diterima
-            updateKembalian(); // Panggil fungsi untuk update kembalian setelah input diterima berubah
+            this.value = formatCurrency(diterima);
+            updateKembalian();
         });
 
-        // Form submit event untuk validasi akhir
+        // Form submit
         document.getElementById('form-transaksi').addEventListener('submit', function(event) {
             var bayar = parseFloat(document.getElementById('bayar').value.replace(/Rp\. /g, '').replace(/\./g, '')
                 .trim());
             var diterima = document.getElementById('diterima').value.replace(/Rp\. /g, '').replace(/\D/g, '')
-        .trim(); // Ambil angka murni
+        .trim();
             var errorMessage = document.getElementById('error-message');
 
-            // Pastikan input diterima bukan kosong
             if (diterima === "" || isNaN(diterima)) {
                 errorMessage.innerHTML = "Uang tidak boleh kosong";
                 errorMessage.style.display = "block";
-                event.preventDefault(); // Mencegah submit
+                event.preventDefault();
                 return;
             }
 
-            // Hitung kembalian
             var kembali = parseFloat(diterima) - bayar;
 
-            // Jika kembalian negatif, tampilkan pesan error dan set kembalian jadi Rp. 0
             if (kembali < 0) {
                 errorMessage.innerHTML = "Uang tidak boleh kurang dari total bayar";
                 errorMessage.style.display = "block";
-                event.preventDefault(); // Mencegah submit
+                event.preventDefault();
                 return;
             }
 
-            // Jika tidak ada error, sembunyikan pesan error
             errorMessage.style.display = "none";
         });
     </script>

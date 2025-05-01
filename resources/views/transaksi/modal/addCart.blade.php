@@ -1,4 +1,4 @@
-<!-- Modal Pilih Barang -->
+<!-- Modal Pilih Produk -->
 <div class="modal fade" id="addCart" tabindex="-1" aria-labelledby="addCartLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">

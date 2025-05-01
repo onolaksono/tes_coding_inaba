@@ -52,17 +52,11 @@ class TransaksiController extends Controller
 
     public function add_cart($id){
         $produk = Produk::findOrFail($id);
-        // dd($produk);
-        // die;
-         // Cek apakah kode_barang sudah ada di tabel keranjang
         $keranjang = Keranjang::where('id_produk', $produk->id)->first();
-        // jika $keranjang == true atau tidak NULL/barang ada
         if ($keranjang) {
-            // Jika barang sudah ada di keranjang, update qty dan subtotal
-            $keranjang->quantity += 1; // Menambah qty
+            $keranjang->quantity += 1;
             $keranjang->subtotal = $keranjang->quantity * $keranjang->harga;
         } else {
-            // Jika barang belum ada di keranjang, buat data keranjang baru
             $keranjang = new Keranjang;
             $keranjang->id_produk = $produk->id;
             $keranjang->produk = $produk->produk;
@@ -71,7 +65,6 @@ class TransaksiController extends Controller
             $keranjang->subtotal = $keranjang->quantity * $keranjang->harga;
         }
 
-        // Simpan data ke tabel keranjang
         $keranjang->save();
         return redirect('/transaksi');
     }
@@ -81,16 +74,14 @@ class TransaksiController extends Controller
         $keranjang = Keranjang::findOrFail($id);
         $produk = Produk::findOrFail($keranjang->id_produk);
         $request->validate([
-            'qty' => 'required|integer|min:1|max:' . $produk->stok, // Validasi qty tidak lebih dari stok
+            'qty' => 'required|integer|min:1|max:' . $produk->stok,
         ], [
             'qty.max'  => 'Pembelian tidak bisa lebih dari '. $produk->stok
         ]);
-        // Update qty dan subtotal
         $keranjang->quantity = $request->input('qty');
         $keranjang->subtotal = $keranjang->quantity * $keranjang->harga;
-        // Simpan perubahan
+
         $keranjang->save();
-        // Redirect kembali ke halaman transaksi
         return redirect('/transaksi');
     }
 
@@ -103,7 +94,7 @@ class TransaksiController extends Controller
     public function hapus_Semua()
     {
         try {
-            Keranjang::truncate(); // menghapus semua isi tabel keranjang
+            Keranjang::truncate();
             return redirect()->back()->with('success', 'Keranjang berhasil dikosongkan');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Terjadi kesalahan saat menghapus semua produk.');
@@ -119,18 +110,16 @@ class TransaksiController extends Controller
             $keranjang = Keranjang::all();
             $total = $keranjang->sum('subtotal');
 
-            // Insert data transaksi ke database
             $transaksi = new Transaksi();
             $transaksi->kode_transaksi = $kode_transaksi;
             $transaksi->tanggal = $tanggal_transaksi;
-            // $transaksi->total = $total;
             $transaksi->save();
 
             foreach ($keranjang as $cart) {
                  // Mengurangi stok produk
                 $produk = Produk::find($cart->id_produk);
                 if ($produk) {
-                    $produk->stok -= $cart->quantity; // Kurangi stok sesuai dengan jumlah yang dibeli
+                    $produk->stok -= $cart->quantity;
                     $produk->save();
                 }
 
@@ -159,18 +148,18 @@ class TransaksiController extends Controller
         $transaksi = Transaksi::with('detailTransaksi.produk')->orderBy('id')->get();
 
         foreach ($transaksi as $tran) {
-            $total = 0; // reset total untuk setiap transaksi
+            $total = 0;
 
             foreach ($tran->detailTransaksi as $detail) {
                 $qty = $detail->quantity;
                 $harga = $detail->produk->harga ?? 0;
                 $subtotal = $qty * $harga;
 
-                $detail->subtotal = $subtotal; // Menyimpan subtotal ke dalam detail
-                $total += $subtotal; // Menambahkan subtotal ke total transaksi
+                $detail->subtotal = $subtotal;
+                $total += $subtotal;
             }
 
-            $tran->totalTransaksi = $total; // Menyimpan total transaksi
+            $tran->totalTransaksi = $total;
         }
 
         return view('transaksi.history', compact('transaksi'));

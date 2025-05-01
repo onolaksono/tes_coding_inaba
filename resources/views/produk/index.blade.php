@@ -2,21 +2,17 @@
 
 @section('content')
     <div class="row">
-        <!-- Judul Halaman -->
         <div class="col-md-12">
             <h2 class="mb-4">Daftar Produk</h2>
         </div>
 
         @include('produk.modal.produk_create')
-        <!-- Tambah Produk Button -->
         <div class="col-md-12 mb-4">
-            <!-- Tombol Tambah Produk -->
             <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalTambahProduk">Tambah
                 Produk</a>
 
         </div>
 
-        <!-- Tabel Produk -->
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
